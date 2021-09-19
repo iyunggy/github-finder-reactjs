@@ -10,13 +10,18 @@ export class Search extends Component {
     searchUser: PropTypes.func.isRequired,
     clearUser: PropTypes.func.isRequired,
     showClear: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired,
   };
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.searchUser(this.state.text);
-    this.setState({ text: "" });
-    console.log("masuk submit", this.state.text);
+    if (this.state.text === "") {
+      this.props.setAlert("Please enter something...", "ligth");
+    } else {
+      this.props.searchUser(this.state.text);
+      this.setState({ text: "" });
+      console.log("masuk submit", this.state.text);
+    }
   };
 
   onChange = (e) => {
